@@ -1,11 +1,15 @@
 -- VIEW Votes by county
 DROP VIEW IF EXISTS votes_by_county;
 CREATE VIEW votes_by_county AS 
-SELECT 	county,
-		ROUND(andrzej_duda / number_of_votes * 100, 2) as DudaVotes,
+SELECT 	zip_code,
+        county,
+	ROUND(andrzej_duda / number_of_votes * 100, 2) as DudaVotes,
         ROUND(rafal_trzaskowski / number_of_votes * 100, 2) as TrzaskowskiVotes
 FROM second_round
-ORDER BY county;
+ORDER BY zip_code;
+
+SELECT *
+FROM votes_by_county;
 
 -- VIEW Big cities votes percent (2 round)
 SELECT 	sr.county,
@@ -39,9 +43,10 @@ ORDER BY ps.name;
 -- VIEW Average salaries by county (excluding 'zagranica' (people who don't live in Poland))
 DROP VIEW IF EXISTS avg_salaries_county;
 CREATE VIEW avg_salaries_county AS
-SELECT 	ps.name,
-		ps.avg_salary
+SELECT 	ps.code,
+        ps.name,
+	ps.avg_salary
 FROM poland_salary as ps
 RIGHT JOIN second_round as sr ON ps.code = sr.zip_code
 WHERE sr.county <> 'zagranica'
-ORDER BY ps.name;
+ORDER BY ps.code;
