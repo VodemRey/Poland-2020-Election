@@ -1,0 +1,1 @@
+select * from big_cities_poland;
