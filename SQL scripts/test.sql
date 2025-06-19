@@ -7,3 +7,6 @@ FROM avg_salaries_county;
 
 SELECT *
 FROM first_round;
+
+-- one more test
+select * from poland_salary;
