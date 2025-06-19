@@ -1,0 +1,3 @@
+FirstRound - https://www.kaggle.com/datasets/rusiano/poland-presidential-elections-2020-results?resource=download
+SecondRound - https://www.kaggle.com/datasets/rusiano/poland-presidential-elections-2020-results?resource=download
+PolandSalary - https://bdl.stat.gov.pl/bdl/start
