@@ -1,3 +1,12 @@
+-- VIEW Total votes
+DROP VIEW IF EXISTS total_votes;
+CREATE VIEW total_votes AS
+SELECT  SUM(number_of_eligible_voters) as TotalEligibleVoters,
+        SUM(number_of_votes) as TotalVotes,
+        ROUND(SUM(andrzej_duda) / SUM(number_of_votes) * 100, 2) as DudaVotes,
+        ROUND(SUM(rafal_trzaskowski) / SUM(number_of_votes) * 100, 2) as TrzaskowskiVotes
+FROM second_round;
+
 -- VIEW Votes by county
 DROP VIEW IF EXISTS votes_by_county;
 CREATE VIEW votes_by_county AS 
