@@ -21,7 +21,11 @@ SELECT *
 FROM votes_by_county;
 
 -- VIEW Big cities votes percent (2 round)
+DROP VIEW IF EXISTS votes_by_big_cities;
+CREATE VIEW votes_by_big_cities AS
 SELECT 	sr.county,
+        bct.latitude,
+        bct.longitude,
         ROUND(sr.andrzej_duda / sr.number_of_votes * 100, 2) as DudaVotesPercent,
         ROUND(sr.rafal_trzaskowski / sr.number_of_votes * 100, 2) as TrzaskowskiVotesPercent
 FROM second_round as sr
@@ -59,3 +63,5 @@ FROM poland_salary as ps
 RIGHT JOIN second_round as sr ON ps.code = sr.zip_code
 WHERE sr.county <> 'zagranica'
 ORDER BY ps.code;
+
+
