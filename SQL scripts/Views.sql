@@ -65,3 +65,30 @@ WHERE sr.county <> 'zagranica'
 ORDER BY ps.code;
 
 
+-- VIEW Average salaries grouped by salary quartiles
+-- (excluding 'zagranica' (people who don't live in Poland))
+DROP VIEW IF EXISTS avg_salaries_county_grouped;
+CREATE VIEW avg_salaries_county_grouped AS
+WITH salary_quartiles AS (
+    SELECT
+        code,
+        NTILE(4) OVER (ORDER BY avg_salary) AS salary_quartile
+    FROM poland_salary
+),
+total_votes_all AS (
+    SELECT SUM(number_of_votes) AS all_votes
+    FROM second_round
+    WHERE county <> 'zagranica'
+)
+SELECT
+    sq.salary_quartile,
+    ROUND(SUM(sr.number_of_votes) * 100.0 / tva.all_votes, 2) AS total_votes_percent,
+    ROUND(AVG(sr.rafal_trzaskowski * 100.0 / sr.number_of_votes), 2) AS avg_trzaskowski_percent,
+    ROUND(AVG(sr.andrzej_duda * 100.0 / sr.number_of_votes), 2) AS avg_duda_percent
+FROM salary_quartiles sq
+JOIN second_round sr ON sq.code = sr.zip_code
+CROSS JOIN total_votes_all tva
+WHERE sr.county <> 'zagranica'
+GROUP BY sq.salary_quartile, tva.all_votes
+ORDER BY sq.salary_quartile;
+

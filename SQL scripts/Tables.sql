@@ -29,3 +29,6 @@ UPDATE big_cities_poland SET latitude = 53.4285, longitude = 14.5528 WHERE city_
 UPDATE big_cities_poland SET latitude = 51.2465, longitude = 22.5684 WHERE city_name = 'Lublin';
 UPDATE big_cities_poland SET latitude = 53.1235, longitude = 18.0084 WHERE city_name = 'Bydgoszcz';
 UPDATE big_cities_poland SET latitude = 53.1325, longitude = 23.1688 WHERE city_name = 'Bialystok';
+
+
+

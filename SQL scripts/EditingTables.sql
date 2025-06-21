@@ -2,7 +2,7 @@
 UPDATE poland_salary
 SET code = SUBSTRING(code, 2)
 WHERE code LIKE '0%';
-
+-- Data correction for code in poland_salary
 UPDATE poland_salary
 SET code = LEFT(code, LENGTH(code) - 1)
 WHERE code LIKE '%0';
@@ -16,7 +16,7 @@ WHERE zip_code = 146501;
 DELETE FROM second_round
 WHERE county = 'statki';
 
---
+-- Data correction for 'zamosc' in poland_salary
 UPDATE poland_salary
 SET name = 'zamosc'
 WHERE code = 66400;
